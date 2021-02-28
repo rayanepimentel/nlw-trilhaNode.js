@@ -3,6 +3,7 @@ import { getRepository } from 'typeorm';
 import { User } from '../models/User'
 
 class UserController {
+    
     async create(req: Request, res: Response) {
         const { name, email } = req.body;
 
@@ -16,17 +17,24 @@ class UserController {
             return res.status(400).json({
                 error: "Usuário já existe!"
             });
-        }
-        
+        };
+
         const user = usersRespository.create({
             name, 
             email
-        })
+        });
+
+        
 
         await usersRespository.save(user);
 
+        
+
         return res.json(user);
     }
+
+
+    
 }
 
 export { UserController }
